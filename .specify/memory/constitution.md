@@ -1,55 +1,78 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: 1.0.0 → 1.1.0
+Added sections: Project Name, Primary Goal, Environment Rules, Technical Constraints, Functional Requirements, Architecture Rules, Folder Structure, Development Process
+Removed sections: None
+Modified principles: All 6 principles redefined for Todo CLI application
+Templates requiring updates: ✅ Updated
+Follow-up TODOs: None
+-->
+
+# In-Memory Todo CLI Application Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. In-Memory Architecture
+The application stores all data in memory only with no persistent storage. No files, databases, or external storage systems may be used. This ensures simplicity and prevents data persistence across application runs. Rationale: Maintains the clean, stateless nature of the application while focusing on core functionality.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Command-Line Interface Focus
+All user interactions occur through a console-based interface. The application must accept command-line arguments and provide clear, readable output to stdout/stderr. Input validation and user-friendly error messages are required. Rationale: Provides a lightweight, efficient interface that works in any terminal environment.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. UV Package Management (NON-NEGOTIABLE)
+UV must be used for all dependency management and project execution. All commands must be compatible with UV, and the project must run using `uv run python src/main.py`. This ensures consistent, fast package management. Rationale: Maintains consistency and leverages UV's performance advantages.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Type Safety and Clean Code
+All code must use type hints and follow PEP8 standards. Functions should have clear, single responsibilities with well-defined boundaries. Code must be modular, testable, and maintainable. Rationale: Ensures code quality, readability, and maintainability.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Python 3.13+ Standard Library Only
+The application must use only Python 3.13+ standard library modules with no external dependencies beyond what UV manages for the project structure. No third-party packages for core functionality. Rationale: Ensures portability and reduces external dependencies.
 
-### [PRINCIPLE_6_NAME]
+### VI. Test-Driven Development
+All features must be developed using TDD: tests written first, then implementation. Each function and feature must have corresponding unit tests. The Red-Green-Refactor cycle must be strictly followed. Rationale: Ensures code reliability and prevents regressions.
 
+## Technical Constraints and Requirements
 
-[PRINCIPLE__DESCRIPTION]
+- Python version: 3.13+
+- In-memory storage only (no files, no database)
+- Console-based interaction
+- Standard Python library only
+- UV for project management
+- Project must run using `uv run python src/main.py`
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Functional Requirements
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+1. Add todo with title and description
+2. List all todos with ID and status
+3. Update todo by ID
+4. Delete todo by ID
+5. Mark todo complete/incomplete
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Architecture Rules
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- Clean code principles
+- Separation of concerns
+- Modular design
+- Use type hints throughout
+- Single responsibility for functions
+- Clear input/output boundaries
+
+## Folder Structure
+
+- /src - Main source code
+- /specs/history - Specification files
+- README.md - Project documentation
+- CLAUDE.md - Claude Code instructions
+
+## Development Process
+
+- Use Spec-Kit Plus commands only
+- Follow order: specify → plan → tasks → implement
+- Store all specs in specs/history
+- All changes must follow the Agentic Dev Stack workflow
+- Each task must be testable and verifiable
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices. All code reviews must verify compliance with these principles. Any architectural decisions that conflict with these principles require constitution amendments. All pull requests must demonstrate adherence to these rules.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.1.0 | **Ratified**: 2026-01-04 | **Last Amended**: 2026-01-04
